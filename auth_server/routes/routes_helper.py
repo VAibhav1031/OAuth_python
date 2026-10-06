@@ -1,7 +1,8 @@
-from fastapi import HTTPException, status
 import jwt
-from datetime import datetime, timedelta,UTC
 import bcrypt
+from fastapi import HTTPException, status
+from datetime import datetime, timedelta,UTC
+
 
 def jwtCreation(client_id:str,private_key:str):
     payload = {
@@ -55,4 +56,4 @@ def verifyHashedPassword(password:str, hashPassword:bytes):
     password_byte = password.encode(encoding='utf-8')
 
     return bcrypt.checkpw(password_byte,hashPassword)
-        
+     

@@ -1,25 +1,24 @@
-from datetime import UTC, datetime
-from sqlalchemy import  DateTime, ForeignKey, Integer, String
+from datetime import  datetime
+from sqlalchemy import  DateTime, ForeignKey, Integer, String,JSON
 from sqlalchemy.orm import relationship,Mapped, mapped_column
-from sqlalchemy.dialects.postgresql import ARRAY
 from auth_server.database import Base
 
 class Client(Base):
-    __tablename__='client'
+    __tablename__:str='client'
    
-    client_id                   :Mapped[int]        = mapped_column(Integer, primary_key=True)
+    client_id                   :Mapped[int]        = mapped_column(String, primary_key=True)
     client_secret               :Mapped[str]        = mapped_column(String(255),nullable=False)
     client_id_issued_at         :Mapped[datetime]   = mapped_column(DateTime(timezone=True),default = lambda : datetime.now())
-    client_secret_expires_at    :Mapped[datetime]   = mapped_column(DateTime(),default = 0)
+    client_secret_expires_at    :Mapped[datetime]   = mapped_column(DateTime(timezone=True),default = None) # default also has to be of that object type or what cause currently i have given is the integer and all . 
     client_name                 :Mapped[str]        = mapped_column(String(60),nullable=False)
-    grant_type                  :Mapped[list[str]]  = mapped_column(ARRAY(String),nullable=False)
+    grant_type                  :Mapped[list[str]]  = mapped_column(JSON,nullable=False)
     client_type                 :Mapped[str]        = mapped_column(String(60),nullable=False)
     redirect_uris               :Mapped[str]        = mapped_column(String(255))
 
     auth_detail                                     = relationship("AuthDetail",backref="client",lazy=True)
 
 class AuthToken(Base):
-    __tablename__ = 'auth_detail'
+    __tablename__ :str = 'auth_detail'
 
     auth_id   = mapped_column(Integer,primary_key=True)
     jwt_token = mapped_column(Integer,primary_key=True)

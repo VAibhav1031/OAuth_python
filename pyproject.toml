@@ -1,0 +1,15 @@
+[project]
+name = "auth-work"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "alembic>=1.20.0",
+    "bcrypt>=5.0.0",
+    "cryptography>=50.0.2",
+    "dotenv>=0.9.9",
+    "fastapi[standard]>=0.142.2",
+    "pyjwt[crypto]>=2.15.1",
+    "sqlalchemy>=2.1.3",
+]

@@ -8,10 +8,30 @@ class ClientDet(BaseModel):
     client_type: str
     redirect_uris: list[str] | None= None
 
-class AuthDet(BaseModel):
+
+# oauth/token has many type based on teh grant_type we have different approach to the verify ourselves
+
+#client_credentials
+class AuthDetClientCredentials(BaseModel):
     client_id: str
     client_secret: str
-    client_type: str
     grant_type: str
-    redirect_uris: list[str] | None = None
+    scope:str | None = None
+
+
+#authorization_code
+class AuthDetAuthorizationCode(BaseModel):
+    grant_type: str
+    code: str | None = None
+    redirect_uri:str | None = None
+    client_id:str 
+    client_secret:str
+    code_verifier:str | None = None
+
+#refresh_token
+class AuthDetRefreshToken(BaseModel):
+    grant_type:str
+    refrest_token:str
+    client_id:str
+    client_secret:str
 

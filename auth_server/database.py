@@ -1,9 +1,9 @@
 from sqlalchemy import  create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from .config import setting
 
-DATABASE_URL = "sqlite:///./test.db"
 
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+engine = create_engine(setting.database_url, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
